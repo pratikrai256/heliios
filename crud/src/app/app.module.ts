@@ -12,11 +12,13 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserspageComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

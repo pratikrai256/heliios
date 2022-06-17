@@ -1,190 +1,283 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">LOGO</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  <br>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link ">Contact Us</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" name="firstName" [(ngModel)]="firstName" (ngModelChange)="Search()" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-  
-  <button type="button" class="btn btn-primary fa-solid fa-plus" data-toggle="modal" data-target="#exampleModal">
-    Add User
+  <a class="navbar-brand" href="#">LOGO</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
   </button>
-  
-  
-  <div class="mat-elevation-z8">
-    <table mat-table matSort [dataSource]="details"> 
-  
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-  
-      <!-- Age Column -->
-      <ng-container matColumnDef="age">
-        <th mat-header-cell *matHeaderCellDef > Age </th>
-        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-      </ng-container>
-  
-      <!-- Email Column -->
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
-  
-      <!-- Contact Column -->
-      <ng-container matColumnDef="contact">
-        <th mat-header-cell *matHeaderCellDef> Contact </th>
-        <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
-      </ng-container>
-
-            <!-- Salary Column -->
-            <ng-container matColumnDef="salary">
-              <th mat-header-cell *matHeaderCellDef> Salary </th>
-              <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
-            </ng-container>
-
-                       <!-- Actions Column -->
-                        <ng-container matColumnDef="actions">
-                          <th mat-header-cell *matHeaderCellDef> Actions </th>
-                          <td mat-cell *matCellDef="let element"><button type="button"  data-toggle="modal" (click)="viewUser(element._id)" data-target="#exampleModal2" class=" btn btn-success fa-solid fa-pen-to-square"> Edit </button>
-                          <button class="btn btn-danger fa-solid fa-trash" (click)="deleteDetails(element._id)"> Delete</button>
-                        </td>
-                        </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  
-    <mat-paginator
-                      [pageSize]="2"
-                     [pageSizeOptions]="[2, 5, 10]"
-    >
-    </mat-paginator>
+  <br />
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">Contact Us</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        name="firstName"
+        [(ngModel)]="firstName"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+        Search
+      </button>
+    </form>
   </div>
-  
+</nav>
 
+<button
+  type="button"
+  class="btn btn-primary fa-solid fa-plus"
+  data-toggle="modal"
+  data-target="#exampleModal"
+>
+  Add User
+</button>
 
+<div class="mat-elevation-z8">
+  <table mat-table matSort [dataSource]="details | search: firstName">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
+    <!-- Age Column -->
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef>Age</th>
+      <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+    </ng-container>
 
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
 
+    <!-- Contact Column -->
+    <ng-container matColumnDef="contact">
+      <th mat-header-cell *matHeaderCellDef>Contact</th>
+      <td mat-cell *matCellDef="let element">{{ element.contact }}</td>
+    </ng-container>
 
+    <!-- Salary Column -->
+    <ng-container matColumnDef="salary">
+      <th mat-header-cell *matHeaderCellDef>Salary</th>
+      <td mat-cell *matCellDef="let element">{{ element.salary }}</td>
+    </ng-container>
 
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          type="button"
+          data-toggle="modal"
+          (click)="viewUser(element._id)"
+          data-target="#exampleModal2"
+          class="btn btn-success fa-solid fa-pen-to-square"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-danger fa-solid fa-trash"
+          (click)="deleteDetails(element._id)"
+        >
+          Delete
+        </button>
+      </td>
+    </ng-container>
 
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
+  <mat-paginator [pageSize]="2" [pageSizeOptions]="[2, 5, 10]"> </mat-paginator>
+</div>
 
+<!-- Modal -->
+<form #addData="ngForm" (ngSubmit)="addDealer(addData)">
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Dealer</h5>
+          <p>All Fields are Mandatory</p>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>Name </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;<input
+            type="text"
+            #name="ngModel"
+            ngModel
+            name="name"
+            placeholder="enter name"
+          /><br />
 
-  
-  
-    
-    <!-- Modal -->
-    <form #addData="ngForm" (ngSubmit)="addDealer(addData)">
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add Dealer </h5>
-                <p>All Fields are Mandatory</p>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <label>Name </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;<input type="text" #name="ngModel"ngModel name="name" placeholder="enter name" ><br>
-  
-              <label>Age </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="text" #age="ngModel"ngModel name="age" placeholder="enter age" ><br>
-  
-              <label>Email </label>&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" #email="ngModel"ngModel name="email" placeholder="enter email" ><br>
-              
-              <label> Contact </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="text" #contact="ngModel"ngModel name="contact" placeholder="enter contact" ><br>
-  
-              <label>Salary </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="text" #salary="ngModel"ngModel name="salary" placeholder="enter salary" ><br>
-  
+          <label>Age </label
+          >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input
+            type="text"
+            #age="ngModel"
+            ngModel
+            name="age"
+            placeholder="enter age"
+          /><br />
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" >Submit</button>
-          </div>
+          <label>Email </label>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+          &nbsp;<input
+            type="text"
+            #email="ngModel"
+            ngModel
+            name="email"
+            placeholder="enter email"
+          /><br />
+
+          <label> Contact </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input
+            type="text"
+            #contact="ngModel"
+            ngModel
+            name="contact"
+            placeholder="enter contact"
+          /><br />
+
+          <label>Salary </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input
+            type="text"
+            #salary="ngModel"
+            ngModel
+            name="salary"
+            placeholder="enter salary"
+          /><br />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
     </div>
-  </form>
-  
-  
-  
-  
-  <!-- Modal -->
-  <form #editDatas="ngForm" (ngSubmit)="editDealer(editDatas)">
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Dealer </h5>
-                <p>All Fields are Mandatory</p>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <label>Name </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="text" #name="ngModel" id="name"   name="name" [(ngModel)]="selectedData.name"  placeholder="Dealer's Name" ><br>
-  
-              <label>Age </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-              <input type="text"  #age="ngModel" id="age" name="age"  [(ngModel)]="selectedData.age"  placeholder="age" ><br>
-  
-              <label>Email </label>&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp; &nbsp;<input type="text" #email="ngModel" id="email" name="email"  [(ngModel)]="selectedData.email" placeholder="email" ><br>
-              
-              <label>Contact </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="text" #contact="ngModel" id="contact"  name="contact" [(ngModel)]="selectedData.contact"  placeholder="contact" ><br>
-  
-              <label>Salary</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="text" #salary="ngModel" id="salary" name="salary"  [(ngModel)]="selectedData.salary" placeholder="salary" ><br>
-  
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Update</button>
-          </div>
+  </div>
+</form>
+
+<!-- Modal -->
+<form #editDatas="ngForm" (ngSubmit)="editDealer(editDatas)">
+  <div
+    class="modal fade"
+    id="exampleModal2"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Dealer</h5>
+          <p>All Fields are Mandatory</p>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>Name </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input
+            type="text"
+            #name="ngModel"
+            id="name"
+            name="name"
+            [(ngModel)]="selectedData.name"
+            placeholder="Dealer's Name"
+          /><br />
+
+          <label>Age </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
+          <input
+            type="text"
+            #age="ngModel"
+            id="age"
+            name="age"
+            [(ngModel)]="selectedData.age"
+            placeholder="age"
+          /><br />
+
+          <label>Email </label>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+          &nbsp;<input
+            type="text"
+            #email="ngModel"
+            id="email"
+            name="email"
+            [(ngModel)]="selectedData.email"
+            placeholder="email"
+          /><br />
+
+          <label>Contact </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input
+            type="text"
+            #contact="ngModel"
+            id="contact"
+            name="contact"
+            [(ngModel)]="selectedData.contact"
+            placeholder="contact"
+          /><br />
+
+          <label>Salary</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input
+            type="text"
+            #salary="ngModel"
+            id="salary"
+            name="salary"
+            [(ngModel)]="selectedData.salary"
+            placeholder="salary"
+          /><br />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Update</button>
         </div>
       </div>
     </div>
-  </form>
-
-
-
-
-
-
-
-
-
-
-
+  </div>
+</form>
 
 <!-- 
   <table class="table">
