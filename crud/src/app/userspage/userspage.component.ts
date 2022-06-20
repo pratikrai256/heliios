@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AuthService } from '../Services/auth.service';
 import { Router } from '@angular/router';
+import { ApiService } from '../Services/api.service';
 @Component({
   selector: 'app-userspage',
   templateUrl: './userspage.component.html',
@@ -25,10 +26,10 @@ export class UserspageComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
   @ViewChild(MatSort) matSort: MatSort;
 
-  constructor(private service: AuthService, private route: Router) {}
+  constructor(private service: AuthService, private route: Router,private apiS:ApiService) {}
 
   viewDetails() {
-    this.service.getData().subscribe((data) => {
+    this.apiS.getData().subscribe((data) => {
       this.details = data.data;
       console.log(this.details);
     });
@@ -36,25 +37,23 @@ export class UserspageComponent implements OnInit {
 
   viewUser(id: any) {
     for (let i = 0; i < this.details.length; i++) {
-      if (this.details[i]._id === id) {
+      if (this.details[i].id === id) {
         this.selectedData = this.details[i];
-        console.log(this.details[i]);
       }
-    }
+    }  
   }
 
   editDealer(form: NgForm) {
     console.log(form.value);
-    this.service.editData(this.selectedData.id, form.value).subscribe((res) => {
+    this.apiS.editData({id:this.selectedData.id, ...form.value}).subscribe((res) => {
       console.log(res);
     });
   }
 
   deleteDetails(id: any) {
     console.log(id);
-    this.service.deleteData(id).subscribe((data) => {
-      data._id === id;
-
+    this.apiS.deleteData(id).subscribe((data) => {
+      data.id === id;
       alert('Deleted Successfully');
       this.viewDetails();
     });
@@ -63,7 +62,7 @@ export class UserspageComponent implements OnInit {
   addDealer(form: NgForm) {
     console.log(form.value);
 
-    this.service.addData(form.value).subscribe((res) => {
+    this.apiS.addData(form.value).subscribe((res) => {
       console.log('Added Dealer Successfully');
       this.viewDetails();
     });

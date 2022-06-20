@@ -90,7 +90,7 @@
         <button
           type="button"
           data-toggle="modal"
-          (click)="viewUser(element._id)"
+          (click)="viewUser(element.id)"
           data-target="#exampleModal2"
           class="btn btn-success fa-solid fa-pen-to-square"
         >
@@ -98,7 +98,7 @@
         </button>
         <button
           class="btn btn-danger fa-solid fa-trash"
-          (click)="deleteDetails(element._id)"
+          (click)="deleteDetails(element.id)"
         >
           Delete
         </button>

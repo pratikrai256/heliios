@@ -19,6 +19,7 @@ mongoose.connect(dbUrl,{
 })
 
 const userRoutes= require('./routes/user');
+const heliosUserRoutes= require('./routes/sqlrouter/user')
 
 //Body Parser Middleware
 app.use(express.urlencoded({extended: true}))
@@ -29,6 +30,7 @@ app.use(cors());
 
 //Router Level Middleware
 app.use('/users',userRoutes);
+app.use('/heliosUsers',heliosUserRoutes);
 
 //Error level Route
 app.get('/error',(req, res)=>{
