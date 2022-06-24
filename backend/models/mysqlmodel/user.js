@@ -11,11 +11,11 @@ class User{
    
     }
     static getAllUsersData(){
-        return pool.execute("SELECT * FROM heliosuser")
+        return pool.execute("SELECT * FROM helios")
 
     }
     insertUsersData(){
-        let sql= `INSERT INTO heliosUser(
+        let sql= `INSERT INTO helios(
             name,
             age,
             email,
@@ -30,7 +30,7 @@ class User{
         return pool.execute(sql)
     }
     editUsersData(id){
-        let sql=`UPDATE heliosUser SET 
+        let sql=`UPDATE helios SET 
         name='${this.name}',
         age='${this.age}',
         email='${this.email}',
@@ -42,7 +42,7 @@ class User{
 
    static deletUser(id){
     console.log(id,"modals");
-        let sql=`DELETE FROM heliosUser WHERE id='${id}' `
+        let sql=`DELETE FROM helios WHERE id='${id}' `
         return pool.execute(sql)
     }
 

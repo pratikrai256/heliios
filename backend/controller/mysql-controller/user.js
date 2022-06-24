@@ -5,7 +5,7 @@ const userModel=require("../../models/mysqlmodel/user")
 //Reading Users Details
 const getAllUsers=async(req, res, next) => {
     try {
-      const userData=await mySqlPool.execute("select * from heliosuser")
+      const userData=await mySqlPool.execute("select * from helios")
        res.json({
            error:false,
            messages:"",
@@ -16,7 +16,6 @@ const getAllUsers=async(req, res, next) => {
     }
 }
 //Adding User Details
-const e="hatdh@s.com"
 
 const addUser=async(req, res, next) => {
     try {
