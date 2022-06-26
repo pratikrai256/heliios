@@ -52,7 +52,11 @@
 </button>
 
 <div class="mat-elevation-z8">
-  <table mat-table matSort [dataSource]="details | search: firstName">
+  <table
+    mat-table
+    matSort
+    [dataSource]="modifiedData | async | search: firstName"
+  >
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
@@ -108,7 +112,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-
 </div>
 
 <!-- Modal -->
@@ -139,6 +142,7 @@
           &nbsp;<input
             type="text"
             #name="ngModel"
+            autofocus="true"
             ngModel
             name="name"
             placeholder="enter name"
@@ -182,10 +186,10 @@
           /><br />
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
+          <button type="button" class="btn btn-secondary">Close</button>
+          <button type="submit" data-dismiss="modal" class="btn btn-primary">
+            Submit
           </button>
-          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
     </div>

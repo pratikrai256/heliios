@@ -3,7 +3,7 @@ const mySql=require("mysql2")
 const pool=mySql.createPool({
     host:"localhost",
     user:"root",
-    database:"helio",
+    database:"helios",
     password:"root"
 })
 

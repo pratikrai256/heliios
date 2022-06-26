@@ -1,6 +1,5 @@
 const pool=require("../../config/db")
 
-
 class User{
     constructor(name,age,email,contact,salary){
         this.name=name;
@@ -11,11 +10,11 @@ class User{
    
     }
     static getAllUsersData(){
-        return pool.execute("SELECT * FROM helios")
+        return pool.execute("SELECT * FROM heliosuser")
 
     }
     insertUsersData(){
-        let sql= `INSERT INTO helios(
+        let sql= `INSERT INTO heliosuser(
             name,
             age,
             email,
@@ -30,7 +29,7 @@ class User{
         return pool.execute(sql)
     }
     editUsersData(id){
-        let sql=`UPDATE helios SET 
+        let sql=`UPDATE heliosuser SET 
         name='${this.name}',
         age='${this.age}',
         email='${this.email}',
@@ -42,7 +41,7 @@ class User{
 
    static deletUser(id){
     console.log(id,"modals");
-        let sql=`DELETE FROM helios WHERE id='${id}' `
+        let sql=`DELETE FROM heliosuser WHERE id='${id}' `
         return pool.execute(sql)
     }
 

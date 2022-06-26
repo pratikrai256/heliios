@@ -13,7 +13,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SearchPipe } from './search.pipe';
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { heliosReducer } from './store/reducers';
+import { HeliosData } from './store/effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +34,9 @@ import { SearchPipe } from './search.pipe';
     Ng2SearchPipeModule,
     MatSortModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    StoreModule.forRoot({heliosData:heliosReducer}, {}),
+    EffectsModule.forRoot([HeliosData])
    
   ],
   providers: [],
