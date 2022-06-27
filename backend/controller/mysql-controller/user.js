@@ -4,7 +4,7 @@ const userModel = require("../../models/mysqlmodel/user");
 //Reading Users Details
 const getAllUsers = async (req, res, next) => {
   try {
-    const userData = await mySqlPool.execute("select * from heliosUser");
+    const userData = await mySqlPool.execute("select * from helios");
     res.json({
       error: false,
       messages: "",
@@ -22,7 +22,6 @@ const addUser = async (req, res, next) => {
     let pool = new userModel(name, age, email, contact, salary);
     const insert = await pool.insertUsersData();
     let id = insert[0].insertId;
-    // let id = await "SELECT SCOPE_IDENTITY() AS id;";
     res.json({
       error: null,
       message: "user has been added sucessfully",
